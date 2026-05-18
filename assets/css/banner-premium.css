@@ -1,0 +1,392 @@
+:root {
+    --blue-primary: #0056B3;
+    --blue-dark: #003D80;
+    --blue-light: #2E86DE;
+    --blue-glow: #4DA3FF;
+    --green-accent: #27AE60;
+    --green-light: #2ECC71;
+    --green-glow: #58D68D;
+    --dark-bg: #0A0E1A;
+    --dark-surface: #111827;
+}
+
+/* ===== PAGE TITLE SECTION ===== */
+.page-title {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(160deg, #050A18 0%, #0A1628 30%, #0D2137 60%, #071222 100%);
+    padding: 140px 0 80px 0; /* Increased top padding for navbar clearance */
+}
+
+/* ===== VENOM FLUID BLOB ANIMATIONS ===== */
+.venom-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0;
+    z-index: 1;
+}
+
+.venom-blob--1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--blue-primary) 0%, transparent 70%);
+    top: -150px;
+    left: -100px;
+    animation: venomBlobSpawn 1.5s ease-out forwards, venomFloat1 8s ease-in-out infinite 1.7s;
+}
+
+.venom-blob--2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--green-accent) 0%, transparent 70%);
+    bottom: -120px;
+    right: -80px;
+    animation: venomBlobSpawn 1.5s ease-out 0.5s forwards, venomFloat2 10s ease-in-out infinite 2s;
+}
+
+.venom-blob--3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, var(--blue-light) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: venomBlobSpawn 1.8s ease-out 0.8s forwards, venomFloat3 12s ease-in-out infinite 2.6s;
+}
+
+@keyframes venomBlobSpawn {
+    0% { opacity: 0; transform: scale(0.2); }
+    50% { opacity: 0.4; }
+    100% { opacity: 0.25; transform: scale(1); }
+}
+
+@keyframes venomFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(60px, 40px) scale(1.15); }
+    50% { transform: translate(30px, 80px) scale(0.9); }
+    75% { transform: translate(-40px, 50px) scale(1.1); }
+}
+
+@keyframes venomFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-50px, -30px) scale(1.2); }
+    50% { transform: translate(-80px, -60px) scale(0.85); }
+    75% { transform: translate(-20px, -40px) scale(1.1); }
+}
+
+@keyframes venomFloat3 {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    33% { transform: translate(-45%, -55%) scale(1.2); }
+    66% { transform: translate(-55%, -45%) scale(0.9); }
+}
+
+/* ===== WATER DROPS RAIN ===== */
+.rain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.water-drop {
+    position: absolute;
+    width: 2px;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, var(--blue-glow), transparent);
+    border-radius: 0 0 50% 50%;
+    opacity: 0.3;
+    animation: dropFall linear infinite;
+}
+
+@keyframes dropFall {
+    0% { transform: translateY(-100px); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(600px); opacity: 0; }
+}
+
+/* ===== GRID OVERLAY ===== */
+.grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 86, 179, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 86, 179, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 1;
+}
+
+/* ===== CONTENT LAYOUT ===== */
+.page-title .auto-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+}
+
+.page-title .content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.page-title .content-box {
+    flex: 1;
+    text-align: left;
+}
+
+.page-title .image-box {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    opacity: 0;
+    animation: venomImageIn 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.page-title .illustration-img {
+    max-width: 100%;
+    height: auto;
+    /* High-impact Black and White effect */
+    filter: grayscale(100%) brightness(1.2) contrast(1.3) drop-shadow(0 20px 50px rgba(0,0,0,0.8));
+    animation: floatIllustration 6s ease-in-out infinite;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    
+    /* Advanced background removal attempt via blending and masking */
+    mix-blend-mode: screen; 
+    mask-image: radial-gradient(circle, black 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle, black 40%, transparent 80%);
+}
+
+.page-title .illustration-img:hover {
+    animation: venomShake 0.5s ease-in-out infinite !important;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)) brightness(1.1);
+    cursor: pointer;
+}
+
+@keyframes venomImageIn {
+    0% { opacity: 0; transform: translateX(100px) scale(0.8); filter: blur(20px); }
+    100% { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+}
+
+@keyframes venomShake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-2px, -2px) rotate(-1deg); }
+    50% { transform: translate(2px, 2px) rotate(1deg); }
+    75% { transform: translate(-2px, 2px) rotate(-1deg); }
+}
+
+@keyframes floatIllustration {
+    0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+    25% { transform: translateY(-15px) rotateX(2deg) rotateY(3deg); }
+    50% { transform: translateY(0) rotateX(0deg) rotateY(6deg); }
+    75% { transform: translateY(15px) rotateX(-2deg) rotateY(3deg); }
+}
+
+/* ===== HEADING ===== */
+.page-title .content-box h1 {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: venomTitleIn 1.2s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+}
+
+.word--blue {
+    background: linear-gradient(135deg, var(--blue-light), var(--blue-glow), #FFFFFF, var(--blue-light));
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease-in-out infinite;
+}
+
+.word--green {
+    background: linear-gradient(135deg, var(--green-accent), var(--green-light), #FFFFFF, var(--green-accent));
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease-in-out infinite 0.5s;
+}
+
+@keyframes venomTitleIn {
+    0% { opacity: 0; transform: translateY(40px) scale(0.9); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ===== BREADCRUMB ===== */
+.bread-crumb {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 1.2s forwards;
+}
+
+.bread-crumb li {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.bread-crumb li a {
+    color: var(--blue-glow);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.bread-crumb li a:hover { color: var(--green-light); }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ===== PREMIUM FAQ SECTION ===== */
+.faq-section {
+    padding: 100px 0;
+    background: #FFFFFF;
+}
+
+.faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.faq-title-main {
+    font-size: 36px;
+    font-weight: 800;
+    color: #0A1628;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.faq-item {
+    border-bottom: 1px solid #EEEEEE;
+    padding: 20px 0;
+}
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    outline: none;
+}
+
+.faq-question h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333333;
+    margin: 0;
+    transition: color 0.3s;
+}
+
+.faq-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    transition: transform 0.4s;
+}
+
+.faq-icon:before, .faq-icon:after {
+    content: '';
+    position: absolute;
+    background: #0056B3;
+    transition: all 0.3s;
+}
+
+.faq-icon:before {
+    width: 2px;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
+.faq-icon:after {
+    width: 100%;
+    height: 2px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+}
+
+.faq-item.active .faq-icon:before, .faq-item.active .faq-icon:after {
+    background: #FF4D4D;
+}
+
+.faq-item.active h3 {
+    color: #0056B3;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+}
+
+.faq-item.active .faq-answer {
+    max-height: 1000px;
+    transition: max-height 1s ease-in-out;
+}
+
+.faq-answer p {
+    padding: 20px 0 10px 0;
+    color: #666666;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 991px) {
+    .page-title .content-wrapper {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    .page-title .content-box {
+        text-align: center;
+    }
+    .page-title .bread-crumb {
+        justify-content: center;
+    }
+    .page-title .image-box {
+        margin-bottom: 30px;
+    }
+    .page-title .illustration-img {
+        max-height: 250px;
+    }
+}
