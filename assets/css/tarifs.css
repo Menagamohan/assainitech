@@ -1,0 +1,709 @@
+/* ==========================================================================
+   Premium Interactive Rates and Calculator Stylesheet - Assainitech
+   ========================================================================== */
+
+:root {
+    --primary-blue: #0099D9;
+    --primary-green: #5ED645;
+    --dark-bg: #0A0E1A;
+    --glass-card: rgba(22, 34, 56, 0.4);
+    --border-color: rgba(94, 214, 69, 0.2);
+    --border-hover: rgba(94, 214, 69, 0.6);
+    --text-muted: #cbd5e1;
+}
+
+/* Tarifs Section Wrapper */
+.tarifs-section {
+    padding: 80px 0;
+    position: relative;
+    background-color: var(--dark-bg);
+    overflow: hidden;
+    color: #ffffff;
+}
+
+/* Background elements */
+.tarifs-section::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 153, 217, 0.15) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.tarifs-section::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    right: -10%;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(94, 214, 69, 0.12) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.tarifs-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Interactive Controls (Search & Tabs) */
+.tarifs-controls {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.tarifs-search-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.tarifs-search-input {
+    width: 100%;
+    padding: 15px 25px 15px 55px;
+    font-size: 16px;
+    color: #ffffff;
+    background: rgba(22, 34, 56, 0.6);
+    border: 2px solid var(--border-color);
+    border-radius: 30px;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tarifs-search-input:focus {
+    border-color: var(--primary-green);
+    background: rgba(22, 34, 56, 0.85);
+    box-shadow: 0 0 15px rgba(94, 214, 69, 0.3);
+}
+
+.tarifs-search-container i {
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-blue);
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.tarifs-search-input:focus + i {
+    color: var(--primary-green);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Tabs */
+.tarifs-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+}
+
+.tarifs-tab-btn {
+    padding: 10px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: rgba(22, 34, 56, 0.5);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tarifs-tab-btn:hover {
+    color: #ffffff;
+    background: rgba(22, 34, 56, 0.8);
+    border-color: rgba(0, 153, 217, 0.4);
+}
+
+.tarifs-tab-btn.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(0, 153, 217, 0.2) 0%, rgba(94, 214, 69, 0.2) 100%);
+    border-color: var(--primary-green);
+    box-shadow: 0 0 15px rgba(94, 214, 69, 0.2);
+}
+
+/* Pricing Grid */
+.tarifs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+/* Pricing Card (Glassmorphism & Glow) */
+.tarif-card {
+    background: var(--glass-card);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tarif-card.hidden {
+    display: none;
+}
+
+/* Card hover glow & scale */
+.tarif-card:hover {
+    border-color: var(--primary-green);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(94, 214, 69, 0.18), 0 0 25px rgba(0, 153, 217, 0.1);
+}
+
+/* Shine effect on hover */
+.tarif-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 45%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 55%
+    );
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    pointer-events: none;
+}
+
+.tarif-card:hover::before {
+    left: 100%;
+    top: 100%;
+}
+
+.tarif-card-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 12px;
+    background: rgba(0, 153, 217, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(0, 153, 217, 0.3);
+}
+
+.tarif-card:hover .tarif-card-badge {
+    background: rgba(94, 214, 69, 0.2);
+    color: #86efac;
+    border-color: rgba(94, 214, 69, 0.4);
+}
+
+.tarif-card-header {
+    margin-bottom: 20px;
+}
+
+.tarif-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #ffffff;
+    margin-bottom: 12px;
+    transition: color 0.3s ease;
+}
+
+.tarif-card:hover .tarif-card-title {
+    color: var(--primary-green);
+}
+
+.tarif-card-price {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tarif-card-price .suffix {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.tarif-card-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.tarif-card-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tarif-card-features li {
+    font-size: 13.5px;
+    color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tarif-card-features li i {
+    color: var(--primary-green);
+    font-size: 12px;
+}
+
+.tarif-card-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #0369a1 100%);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 153, 217, 0.2);
+}
+
+.tarif-card-btn:hover {
+    background: linear-gradient(135deg, var(--primary-green) 0%, #15803d 100%);
+    box-shadow: 0 4px 15px rgba(94, 214, 69, 0.4);
+    transform: scale(1.02);
+}
+
+/* Price Estimator Widget */
+.tarifs-estimator {
+    max-width: 800px;
+    margin: 60px auto 0 auto;
+    background: rgba(22, 34, 56, 0.3);
+    border: 2px dashed rgba(0, 153, 217, 0.3);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+    transition: border-color 0.3s ease;
+}
+
+.tarifs-estimator:hover {
+    border-color: var(--primary-green);
+}
+
+.estimator-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.estimator-header h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-green);
+    margin-bottom: 10px;
+}
+
+.estimator-header p {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+.estimator-body {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.estimator-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.estimator-col {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.estimator-col label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.estimator-select, .estimator-input {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 15px;
+    color: #ffffff;
+    background: rgba(10, 14, 26, 0.8);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.estimator-select option {
+    background: #0f172a;
+    color: #ffffff;
+}
+
+.estimator-select:focus, .estimator-input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 10px rgba(0, 153, 217, 0.25);
+}
+
+/* Custom range slider styling */
+.estimator-slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.estimator-slider-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.estimator-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(22, 34, 56, 0.8);
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+.estimator-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary-green);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(94, 214, 69, 0.6);
+    transition: transform 0.1s ease;
+}
+
+.estimator-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.estimator-result {
+    background: rgba(0, 153, 217, 0.12);
+    border: 1px solid rgba(0, 153, 217, 0.2);
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.estimator-result::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
+}
+
+.estimator-result-label {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.estimator-result-price {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--primary-green);
+    text-shadow: 0 0 15px rgba(94, 214, 69, 0.2);
+    animation: pulse 2s infinite alternate;
+}
+
+.estimator-result-info {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.03);
+    }
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    .tarifs-estimator {
+        padding: 25px;
+    }
+    
+    .tarif-card {
+        padding: 25px;
+    }
+}
+
+/* ==========================================================================
+   Sidebar Pricing Card Specific Styles (For Service Pages)
+   ========================================================================== */
+.sidebar-tarif-card {
+    background: linear-gradient(135deg, rgba(22, 34, 56, 0.7) 0%, rgba(10, 14, 26, 0.9) 100%);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 30px 25px;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+    color: #ffffff;
+}
+
+.sidebar-tarif-card:hover {
+    border-color: var(--primary-green);
+    box-shadow: 0 20px 40px rgba(94, 214, 69, 0.2), 0 0 25px rgba(0, 153, 217, 0.15);
+    transform: translateY(-5px);
+}
+
+.sidebar-tarif-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 45%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 55%
+    );
+    transform: rotate(45deg);
+    transition: all 0.8s ease;
+    pointer-events: none;
+}
+
+.sidebar-tarif-card:hover::before {
+    left: 100%;
+    top: 100%;
+}
+
+.sidebar-tarif-card .card-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 12px;
+    background: rgba(0, 153, 217, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(0, 153, 217, 0.3);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-tarif-card:hover .card-badge {
+    background: rgba(94, 214, 69, 0.2);
+    color: #86efac;
+    border-color: rgba(94, 214, 69, 0.4);
+}
+
+.sidebar-tarif-card h3 {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 12px !important;
+    line-height: 1.3 !important;
+}
+
+.sidebar-tarif-card .price {
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    color: var(--primary-green) !important;
+    margin-bottom: 20px !important;
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.sidebar-tarif-card .price span {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: var(--text-muted) !important;
+}
+
+.sidebar-tarif-card p {
+    font-size: 14px !important;
+    color: var(--text-muted) !important;
+    line-height: 1.6 !important;
+    margin-bottom: 25px !important;
+}
+
+.sidebar-tarif-card ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 0 25px 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-tarif-card ul li {
+    font-size: 14px !important;
+    color: #e2e8f0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.sidebar-tarif-card ul li i {
+    color: var(--primary-green) !important;
+    font-size: 12px !important;
+    width: auto !important;
+    height: auto !important;
+    background: none !important;
+    border: none !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+}
+
+.sidebar-tarif-card .devis-btn {
+    display: block !important;
+    width: 100% !important;
+    padding: 14px 20px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #0369a1 100%) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(0, 153, 217, 0.3) !important;
+    text-decoration: none !important;
+}
+
+.sidebar-tarif-card .devis-btn:hover {
+    background: linear-gradient(135deg, var(--primary-green) 0%, #15803d 100%) !important;
+    box-shadow: 0 4px 18px rgba(94, 214, 69, 0.5) !important;
+    transform: scale(1.02) !important;
+    color: #ffffff !important;
+}
+
+/* Premium Page Title Banner Price Badge Styles */
+.banner-price-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(94, 214, 69, 0.15) !important;
+    border: 2px solid rgba(94, 214, 69, 0.4) !important;
+    padding: 10px 28px !important;
+    border-radius: 50px !important;
+    color: #ffffff !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    margin-top: 20px !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: 0 0 20px rgba(94, 214, 69, 0.2) !important;
+    animation: bannerPulse 2s infinite ease-in-out !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+}
+
+.banner-price-badge.devis-badge {
+    background: rgba(0, 153, 217, 0.15) !important;
+    border-color: rgba(0, 153, 217, 0.4) !important;
+    box-shadow: 0 0 20px rgba(0, 153, 217, 0.2) !important;
+    animation: bannerPulseBlue 2s infinite ease-in-out !important;
+}
+
+.banner-price-badge span {
+    color: var(--primary-green) !important;
+    margin-left: 8px !important;
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+}
+
+.banner-price-badge.devis-badge span {
+    color: var(--primary-blue) !important;
+}
+
+@keyframes bannerPulse {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0 20px rgba(94, 214, 69, 0.2);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 0 35px rgba(94, 214, 69, 0.45);
+        border-color: rgba(94, 214, 69, 0.7) !important;
+        background: rgba(94, 214, 69, 0.25) !important;
+    }
+}
+
+@keyframes bannerPulseBlue {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0 20px rgba(0, 153, 217, 0.2);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 0 35px rgba(0, 153, 217, 0.45);
+        border-color: rgba(0, 153, 217, 0.7) !important;
+        background: rgba(0, 153, 217, 0.25) !important;
+    }
+}
